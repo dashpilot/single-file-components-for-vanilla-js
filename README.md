@@ -4,6 +4,26 @@ Svelte and Vue-inspired single-file components compiler
 ## About
 Inspired by the way Svelte compiles your single file components into browser-friendly javascript, I created a simple compiler for vanilla javascript. It also features live-reload, so every time you save changes to a single file component, the build script compiles your code and runs it. Although this is a basic POC, in its current form it does help you to better organize your code.
 
-## How to
+## How to install?
 
-Clone this repo and run `npm install`
+Clone this repo and run `npm install` and then `npm run dev` to run the example components
+
+## How to create a single-file component?
+
+Create a new .html file in `src/components`, with the following structure:
+
+```
+<template>
+<!-- This is where the html of your component goes -->
+</template>
+
+<script>
+// This is where your javascript goes
+</script>
+
+<style>
+/* this is where your CSS goes */
+</style>
+```
+
+When you run `npm run dev` or `npm run build` the compiler goes through all the components and automatically splits and minifies/uglifies the JS, CSS and HTML into dist/assets. It also copies index.html to the dist folder.
