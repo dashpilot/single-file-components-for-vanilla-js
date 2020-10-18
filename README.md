@@ -30,7 +30,7 @@ The order of the template-, script- and css- tags is up to your own preference. 
 
 ## What it's not
 
-This script is simply meant to help you write code in a more modular way, but it doesn't feature the wealth of extras Svelte offers (template language, two-way binding, etc.). Let me know if there are any features/improvements you'd like to see.
+This script is simply meant to help you write code in a more modular way, but it doesn't feature the wealth of extras Svelte offers (template language, two-way binding, CSS-scoping etc.). Let me know if there are any features/improvements you'd like to see.
 
 ## Todo
 - might switch out terser and cleancss for node-minify
