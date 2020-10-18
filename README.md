@@ -30,4 +30,4 @@ When you run `npm run dev` or `npm run build` the compiler goes through all the 
 
 ## What it's not
 
-This script is simply meant to help you write code in a more modular way, but it doesn't feature the wealth of extras Svelte offers (template language, two-way binding, etc.).
+This script is simply meant to help you write code in a more modular way, but it doesn't feature the wealth of extras Svelte offers (template language, two-way binding, etc.). Let me know if there are any features/improvements you'd like to see.
