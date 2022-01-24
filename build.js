@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const {
   minify
 } = require("terser");
@@ -37,13 +38,16 @@ minifyJs(data);
 
 function extractTags(filepath, data) {
   var file = fs.readFileSync(filepath, "utf8");
+  var filename = path.basename(filepath, '.html');
 
   const root = parse(file);
   if (root.querySelector("template")) {
     data.template +=
-      'document.querySelector("body").innerHTML += `' +
+      'document.querySelectorAll("' + filename + '").forEach(function(e){' +
+      'e.innerHTML = `' +
       root.querySelector("template").innerHTML +
-      "`\n";
+      '`' +
+      "})\n";
   }
   if (root.querySelector("script")) {
     data.script += root.querySelector("script").text + "\n";
