@@ -39,12 +39,18 @@ function extractTags(filepath, data) {
   var file = fs.readFileSync(filepath, "utf8");
 
   const root = parse(file);
-  data.template +=
-    'document.querySelector("body").innerHTML += `' +
-    root.querySelector("template").innerHTML +
-    "`\n";
-  data.script += root.querySelector("script").text + "\n";
-  data.style += root.querySelector("style").text;
+  if (root.querySelector("template")) {
+    data.template +=
+      'document.querySelector("body").innerHTML += `' +
+      root.querySelector("template").innerHTML +
+      "`\n";
+  }
+  if (root.querySelector("script")) {
+    data.script += root.querySelector("script").text + "\n";
+  }
+  if (root.querySelector("style")) {
+    data.style += root.querySelector("style").text;
+  }
 
   //console.log(data);
 }
