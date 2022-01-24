@@ -30,6 +30,8 @@ Create a new .html file in `src/components`, with the following structure:
 
 The order of the template-, script- and css- tags is up to your own preference. When you run `npm run dev` or `npm run build` the compiler goes through all the components and automatically splits and minifies/uglifies the JS, CSS and HTML into dist/assets. It also copies index.html to the dist folder.
 
+To load a component on the page, create a custom element in index.html that corresponds to the filename of your component. For example if your component is called card.html, create a custom element <card></card> in index.html. You can also load multiple instances of the component on the page, without duplicating the javascript or CSS. See `index.html` for an example.
+
 ## What it's not
 
 This script is simply meant to help you write code in a more modular way, but it doesn't feature the wealth of extras Svelte offers (template language, two-way binding, CSS-scoping etc.). Let me know if there are any features/improvements you'd like to see.
