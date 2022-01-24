@@ -36,7 +36,7 @@ To load a component on the page, create a custom element in index.html that corr
 
 This script is simply meant to help you write code in a more modular way, but it doesn't feature the wealth of extras Svelte offers (template language, two-way binding, CSS-scoping etc.). Let me know if there are any features/improvements you'd like to see.
 
-If you do want templating, two-way-binding and a data-store, take a look at my Alpine.js version: <https://github.com/dashpilot/single-file-components-for-alpinejs>
+If you do want templating, two-way-binding and a data-store, take a look at the Alpine.js version: <https://github.com/dashpilot/single-file-components-for-alpinejs>
 
 ## Press the :star: button
 
