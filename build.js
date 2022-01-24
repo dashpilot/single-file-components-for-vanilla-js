@@ -1,7 +1,16 @@
 const fs = require("fs");
-const { minify } = require("terser");
-const { parse } = require("node-html-parser");
+const {
+  minify
+} = require("terser");
+const {
+  parse
+} = require("node-html-parser");
 const CleanCSS = require("clean-css");
+
+if (!fs.existsSync('./dist')) {
+  fs.mkdirSync('./dist', 0744);
+  fs.mkdirSync('./dist/assets', 0744);
+}
 
 var index = fs.readFileSync("./src/index.html", "utf8");
 fs.writeFileSync("./dist/index.html", index, "utf8");
@@ -15,8 +24,8 @@ const folder = "./src/components/";
 let files = fs.readdirSync(folder);
 let i = 0;
 files.forEach(function(file) {
-    extractTags(folder + file, data);
-    i++;
+  extractTags(folder + file, data);
+  i++;
 });
 
 var output = new CleanCSS().minify(data.style);
@@ -27,23 +36,27 @@ minifyJs(data);
 // helpers
 
 function extractTags(filepath, data) {
-    var file = fs.readFileSync(filepath, "utf8");
+  var file = fs.readFileSync(filepath, "utf8");
 
-    const root = parse(file);
-    data.template +=
-        'document.querySelector("body").innerHTML += `' +
-        root.querySelector("template").innerHTML +
-        "`\n";
-    data.script += root.querySelector("script").text + "\n";
-    data.style += root.querySelector("style").text;
+  const root = parse(file);
+  data.template +=
+    'document.querySelector("body").innerHTML += `' +
+    root.querySelector("template").innerHTML +
+    "`\n";
+  data.script += root.querySelector("script").text + "\n";
+  data.style += root.querySelector("style").text;
 
-    //console.log(data);
+  //console.log(data);
 }
 
 async function minifyJs(data) {
-    var result = await minify(data.template, { sourceMap: true });
-    fs.writeFileSync("./dist/assets/template.min.js", result.code, "utf8");
+  var result = await minify(data.template, {
+    sourceMap: true
+  });
+  fs.writeFileSync("./dist/assets/template.min.js", result.code, "utf8");
 
-    var result2 = await minify(data.script, { sourceMap: true });
-    fs.writeFileSync("./dist/assets/app.min.js", result2.code, "utf8");
+  var result2 = await minify(data.script, {
+    sourceMap: true
+  });
+  fs.writeFileSync("./dist/assets/app.min.js", result2.code, "utf8");
 }
