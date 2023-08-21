@@ -1,16 +1,12 @@
 const fs = require("fs");
 const path = require("path");
-const {
-  minify
-} = require("terser");
-const {
-  parse
-} = require("node-html-parser");
+const { minify } = require("terser");
+const { parse } = require("node-html-parser");
 const CleanCSS = require("clean-css");
 
-if (!fs.existsSync('./dist')) {
-  fs.mkdirSync('./dist', 0744);
-  fs.mkdirSync('./dist/assets', 0744);
+if (!fs.existsSync("./dist")) {
+  fs.mkdirSync("./dist", 0744);
+  fs.mkdirSync("./dist/assets", 0744);
 }
 
 var index = fs.readFileSync("./src/index.html", "utf8");
@@ -24,7 +20,7 @@ data.template = "";
 const folder = "./src/components/";
 let files = fs.readdirSync(folder);
 let i = 0;
-files.forEach(function(file) {
+files.forEach(function (file) {
   extractTags(folder + file, data);
   i++;
 });
@@ -38,15 +34,17 @@ minifyJs(data);
 
 function extractTags(filepath, data) {
   var file = fs.readFileSync(filepath, "utf8");
-  var filename = path.basename(filepath, '.html');
+  var filename = path.basename(filepath, ".html");
 
   const root = parse(file);
   if (root.querySelector("template")) {
     data.template +=
-      'document.querySelectorAll("' + filename + '").forEach(function(e){' +
-      'e.innerHTML = `' +
-      root.querySelector("template").innerHTML.replace(/\s\s+/g, ' ') +
-      '`' +
+      'document.querySelectorAll("' +
+      filename +
+      '").forEach(function(e){' +
+      "e.innerHTML = `" +
+      root.querySelector("template").innerHTML.replace(/\s\s+/g, " ") +
+      "`" +
       "})\n";
   }
   if (root.querySelector("script")) {
@@ -60,9 +58,14 @@ function extractTags(filepath, data) {
 }
 
 async function minifyJs(data) {
-  let combined = data.template + ' ' + data.script;
-  var result = await minify(combined, {
-    sourceMap: true
-  });
-  fs.writeFileSync("./dist/assets/app.min.js", result.code, "utf8");
+  // only minify js in production
+  var env = process.argv[2] || "dev";
+  if (env == "dev") {
+    fs.writeFileSync("./public/assets/app.min.js", combined, "utf8");
+  } else {
+    var result = await minify(combined, {
+      sourceMap: true,
+    });
+    fs.writeFileSync("./public/assets/app.min.js", result.code, "utf8");
+  }
 }

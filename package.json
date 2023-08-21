@@ -4,8 +4,9 @@
   "description": "An on-page CSS Editor",
   "main": "build.js",
   "scripts": {
-    "build": "node build.js",
-    "dev": "dev-refresh src --serve dist --cmd 'npm run build'"
+    "build": "node build.js prod",
+    "build-dev": "node build.js dev",
+    "dev": "dev-refresh src --serve public --cmd 'npm run build-dev'"
   },
   "repository": {
     "type": "git",
