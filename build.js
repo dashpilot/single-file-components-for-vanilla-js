@@ -4,13 +4,13 @@ const { minify } = require("terser");
 const { parse } = require("node-html-parser");
 const CleanCSS = require("clean-css");
 
-if (!fs.existsSync("./dist")) {
-  fs.mkdirSync("./dist", 0744);
-  fs.mkdirSync("./dist/assets", 0744);
+if (!fs.existsSync("./public")) {
+  fs.mkdirSync("./public", 0744);
+  fs.mkdirSync("./public/assets", 0744);
 }
 
 var index = fs.readFileSync("./src/index.html", "utf8");
-fs.writeFileSync("./dist/index.html", index, "utf8");
+fs.writeFileSync("./public/index.html", index, "utf8");
 
 var data = [];
 data.script = "";
@@ -26,7 +26,7 @@ files.forEach(function (file) {
 });
 
 var output = new CleanCSS().minify(data.style);
-fs.writeFileSync("./dist/assets/app.min.css", output.styles, "utf8");
+fs.writeFileSync("./public/assets/app.min.css", output.styles, "utf8");
 
 minifyJs(data);
 
