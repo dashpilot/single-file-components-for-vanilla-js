@@ -58,6 +58,7 @@ function extractTags(filepath, data) {
 }
 
 async function minifyJs(data) {
+  var combined = data.template + " " + data.script;
   // only minify js in production
   var env = process.argv[2] || "dev";
   if (env == "dev") {
