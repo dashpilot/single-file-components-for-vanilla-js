@@ -10,7 +10,8 @@ It also features **live-reload**, so every time you save changes to a single fil
 
 ## How to install?
 
-Clone this repo and run `npm install` and then `npm run dev` to run the example components
+1.  run `npx degit https://github.com/dashpilot/single-file-components-for-vanilla-js`
+2.  run `npm install` and then `npm run dev` to run the example components
 
 ## How to create a single-file component?
 
