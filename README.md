@@ -2,6 +2,8 @@
 
 Svelte and Vue-inspired single-file components compiler for vanilla javascript.
 
+Update: I also made a Vite plugin version of this project: https://github.com/dashpilot/single-file-components-for-vanilla-js-vite
+
 ## About
 
 Inspired by the way Svelte compiles your single file components into browser-friendly javascript, I created a simple compiler for vanilla javascript. You write your code in single-file-component-style, and the build script compiles it to browser-friendly javascript, html and css.
